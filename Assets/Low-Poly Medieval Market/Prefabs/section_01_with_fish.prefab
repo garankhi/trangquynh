@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6731284545799945742
 Transform:
@@ -23,9 +23,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6731284545799945737}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2566035405599577004}
   - {fileID: 3086240214667185990}
@@ -36,13 +38,13 @@ Transform:
   - {fileID: 7199794844555719779}
   - {fileID: 1157701754390183411}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1464826553279102526
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6731284545799945742}
     m_Modifications:
     - target: {fileID: 8628567852500912733, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
@@ -93,7 +95,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: fish (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 9004107507267555559, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
 --- !u!4 &7199794844555719779 stripped
 Transform:
@@ -105,6 +114,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6731284545799945742}
     m_Modifications:
     - target: {fileID: 8628567852500912733, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
@@ -167,7 +177,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: fish (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9004107507267555559, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
 --- !u!4 &3086240215936344120 stripped
 Transform:
@@ -179,6 +196,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6731284545799945742}
     m_Modifications:
     - target: {fileID: 8628567852500912733, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
@@ -241,7 +259,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: fish (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9004107507267555559, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
 --- !u!4 &3086240215623484360 stripped
 Transform:
@@ -253,6 +278,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6731284545799945742}
     m_Modifications:
     - target: {fileID: 8628567852500912733, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
@@ -303,7 +329,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: fish
       objectReference: {fileID: 0}
+    - target: {fileID: 9004107507267555559, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
 --- !u!4 &3086240214667185990 stripped
 Transform:
@@ -315,11 +348,16 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6731284545799945742}
     m_Modifications:
     - target: {fileID: 8484184211952766434, guid: 8c40448a6e292ce4aa884b48a55cfc10, type: 3}
       propertyPath: m_Name
       value: swordfish
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484184211952766434, guid: 8c40448a6e292ce4aa884b48a55cfc10, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9148552720475248472, guid: 8c40448a6e292ce4aa884b48a55cfc10, type: 3}
       propertyPath: m_RootOrder
@@ -366,6 +404,9 @@ PrefabInstance:
       value: -9.919
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c40448a6e292ce4aa884b48a55cfc10, type: 3}
 --- !u!4 &2566035405599577004 stripped
 Transform:
@@ -377,6 +418,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6731284545799945742}
     m_Modifications:
     - target: {fileID: 6197653747744332049, guid: 3337e494fa27d754cb3c069a8a7e6bc8, type: 3}
@@ -415,7 +457,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: section_01
       objectReference: {fileID: 0}
+    - target: {fileID: 6722094768410264491, guid: 3337e494fa27d754cb3c069a8a7e6bc8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3337e494fa27d754cb3c069a8a7e6bc8, type: 3}
 --- !u!4 &821958189214517559 stripped
 Transform:
@@ -427,6 +476,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6731284545799945742}
     m_Modifications:
     - target: {fileID: 8628567852500912733, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
@@ -489,7 +539,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: fish (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 9004107507267555559, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0345e1ce04d44947b508fbb0489ea35, type: 3}
 --- !u!4 &1157701754390183411 stripped
 Transform:
@@ -501,11 +558,16 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6731284545799945742}
     m_Modifications:
     - target: {fileID: 8484184211952766434, guid: 8c40448a6e292ce4aa884b48a55cfc10, type: 3}
       propertyPath: m_Name
       value: swordfish (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484184211952766434, guid: 8c40448a6e292ce4aa884b48a55cfc10, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9148552720475248472, guid: 8c40448a6e292ce4aa884b48a55cfc10, type: 3}
       propertyPath: m_RootOrder
@@ -552,6 +614,9 @@ PrefabInstance:
       value: 184.376
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c40448a6e292ce4aa884b48a55cfc10, type: 3}
 --- !u!4 &1207158483179327903 stripped
 Transform:
