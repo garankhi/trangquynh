@@ -54,6 +54,7 @@ namespace GinjaGaming.FinalCharacterController
         private float _verticalVelocity = 0f;
         private float _antiBump;
         private float _stepOffset;
+        private bool _cameraControlEnabled = true;
 
         private PlayerMovementState _lastMovementState = PlayerMovementState.Falling;
         #endregion
@@ -66,6 +67,16 @@ namespace GinjaGaming.FinalCharacterController
 
             _antiBump = sprintSpeed;
             _stepOffset = _characterController.stepOffset;
+        }
+
+        public void SetCameraControlEnabled(bool isEnabled)
+        {
+            _cameraControlEnabled = isEnabled;
+
+            if (!isEnabled && _playerLocomotionInput != null)
+            {
+                _playerLocomotionInput.ClearLookInput();
+            }
         }
         #endregion
 
@@ -193,6 +204,11 @@ namespace GinjaGaming.FinalCharacterController
         #region Late Update Logic
         private void LateUpdate()
         {
+            if (!_cameraControlEnabled)
+            {
+                return;
+            }
+
             UpdateCameraRotation();
         }
 
