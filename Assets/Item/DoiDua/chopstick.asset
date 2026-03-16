@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Chopstick
   icon: {fileID: 21300000, guid: 30a526634704b27409ba8792e801d4f8, type: 3}
   maxStackSize: 10
-  itemPrefab: {fileID: 919132149155446097, guid: 712c3ba703c09674bab0e2442b163236, type: 3}
-  handItemPrefab: {fileID: 919132149155446097, guid: 712c3ba703c09674bab0e2442b163236, type: 3}
+  itemPrefab: {fileID: 3562905478148597595, guid: beee59bc179d3ce49aa06211003bc7cf, type: 3}
+  handItemPrefab: {fileID: 3562905478148597595, guid: beee59bc179d3ce49aa06211003bc7cf, type: 3}
   description: "\u0110\xF4i \u0111\u0169a tre"
