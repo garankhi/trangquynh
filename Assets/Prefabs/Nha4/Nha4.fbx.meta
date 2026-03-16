@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 332dfeb6d3956644b9669a93d0e10eef
+guid: 0fe15be3223cbb54ebff3def5288c533
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -8,22 +8,22 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: texture_pbr_20250901
-    second: {fileID: 2800000, guid: 4a82ebfec15f9644eae7fbd898028af5, type: 3}
+    second: {fileID: 2800000, guid: 36a041d312336064b9e52f1d94bec2e4, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: texture_pbr_20250901_metallic
-    second: {fileID: 2800000, guid: bb88900be546ac2419d4e7b3dc0fe0a4, type: 3}
+    second: {fileID: 2800000, guid: 7bd131a51570a904f90f749be3189284, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: texture_pbr_20250901_normal
-    second: {fileID: 2800000, guid: c6ee1d32245813c458d7cd2cec298d00, type: 3}
+    second: {fileID: 2800000, guid: 06d17caf74e380e46b64a226dc303599, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: texture_pbr_20250901_roughness
-    second: {fileID: 2800000, guid: 65ca107feee83334f86e326fc2dd18b3, type: 3}
+    second: {fileID: 2800000, guid: 840cd83f4ff7efd43a4acf2c49909d35, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -59,10 +59,10 @@ ModelImporter:
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
-    importVisibility: 0
-    importBlendShapes: 0
-    importCameras: 0
-    importLights: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -99,7 +99,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 0
+  importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []
@@ -118,7 +118,7 @@ ModelImporter:
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
