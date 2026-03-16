@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DialogueEditor;
 using GinjaGaming.FinalCharacterController;
 using TMPro;
 using UnityEngine;
@@ -65,7 +66,11 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        bool isConversationOpen = ConversationManager.Instance != null && ConversationManager.Instance.IsConversationActive;
+
+        ApplyInventoryState();
+
+        if (Input.GetKeyDown(KeyCode.Tab) && !isConversationOpen)
         {
             container.SetActive(!container.activeInHierarchy);
             ApplyInventoryState();
@@ -73,11 +78,15 @@ public class Inventory : MonoBehaviour
 
         if (container != null && container.activeInHierarchy)
         {
-            ApplyInventoryState();
             StartDrag();
             UpdateDragItemPosition();
             EndDrag();
             UpdateItemDescription();
+            return;
+        }
+
+        if (isConversationOpen)
+        {
             return;
         }
 
@@ -449,13 +458,15 @@ public class Inventory : MonoBehaviour
     private void ApplyInventoryState()
     {
         bool isInventoryOpen = container != null && container.activeInHierarchy;
+        bool isConversationOpen = ConversationManager.Instance != null && ConversationManager.Instance.IsConversationActive;
+        bool shouldUnlockCursor = isInventoryOpen || isConversationOpen;
 
         if (playerController != null)
         {
-            playerController.SetCameraControlEnabled(!isInventoryOpen);
+            playerController.SetCameraControlEnabled(!shouldUnlockCursor);
         }
 
-        if (isInventoryOpen)
+        if (shouldUnlockCursor)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
