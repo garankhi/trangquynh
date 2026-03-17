@@ -2,7 +2,7 @@ using DialogueEditor;
 using UnityEngine;
 
 /// <summary>
-/// Nhiệm vụ 2: Đưa Thư — gắn vào ConversationTrigger của Ông Lái Xe Ngựa.
+/// Nhiệm vụ 2: Đưa Thư — gắn vào ConversationTrigger của Ông Quan Tổng.
 /// Kiểm tra Inventory có tờ thư không:
 ///   - Có → trừ thư, cộng tiền, hoàn thành nhiệm vụ
 ///   - Không → nhắc nhở
@@ -92,7 +92,7 @@ public class Mission2TurnInController : MonoBehaviour, IConversationOverrideProv
 
         state = TurnInState.Completed;
 
-        // Báo cho Mission2Controller bên Ông Quan Tổng biết là xong
+        // Báo cho Mission2Controller bên Ông Đưa Thư biết là xong
         if (Mission2Controller.Instance != null)
             Mission2Controller.Instance.MarkCompleted();
 

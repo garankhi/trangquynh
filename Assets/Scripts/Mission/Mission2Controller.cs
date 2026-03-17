@@ -3,7 +3,7 @@ using DialogueEditor;
 using UnityEngine;
 
 /// <summary>
-/// Nhiệm vụ 2: Đưa Thư — gắn vào ConversationTrigger của Ông Quan Tổng.
+/// Nhiệm vụ 2: Đưa Thư — gắn vào ConversationTrigger của Ông Đưa Thư.
 /// Khi player nhận nhiệm vụ, thư được thêm thẳng vào Inventory.
 /// Script này implements IConversationOverrideProvider để ConversationStarter
 /// tự chọn đúng conversation theo trạng thái nhiệm vụ.
@@ -27,6 +27,7 @@ public class Mission2Controller : MonoBehaviour, IConversationOverrideProvider
 
     [Header("Conversations")]
     [SerializeField] private NPCConversation introConversation;
+    [SerializeField] private NPCConversation reminderConversation;  // khi player quay lại chưa giao thư
     [SerializeField] private NPCConversation afterQuestConversation;
 
     // Mission2TurnInController sẽ gọi hàm này khi player giao thư thành công
@@ -93,11 +94,11 @@ public class Mission2Controller : MonoBehaviour, IConversationOverrideProvider
             return true;
         }
 
-        // Đang Active: quay lại nói chuyện với Ông Quan Tổng → giữ nguyên conversation mặc định
+        // Đang Active: quay lại nói chuyện với Ông Đưa Thư → nhắc nhở
         if (state == MissionState.Active)
         {
-            conversation = defaultConversation;
-            return false;
+            conversation = reminderConversation != null ? reminderConversation : defaultConversation;
+            return reminderConversation != null;
         }
 
         return false;
