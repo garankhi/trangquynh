@@ -66,20 +66,24 @@ public class Mission3Controller : MonoBehaviour, IConversationOverrideProvider
     {
         conversation = defaultConversation;
 
-        // 1. Nếu đã xong hết
+        // LẤY TÊN HOẶC TAG CỦA NPC ĐANG NÓI CHUYỆN
+        // Ở đây ta so sánh: Nếu hội thoại mặc định là của Ông Cá/Cô Thịt thì KHÔNG override bằng lời Trưởng Làng
+        if (defaultConversation == meatVendorTalk || defaultConversation == fishVendorTalk)
+        {
+            return false; // Trả về false để NPC nào nói hội thoại của NPC đó (không bị đè)
+        }
+
+        // --- LOGIC DÀNH RIÊNG CHO TRƯỞNG LÀNG (BẾP TRƯỞNG) ---
         if (state == MissionState.Completed)
         {
             conversation = afterQuestConversation ?? completeConversation;
             return conversation != null;
         }
 
-        // 2. Nếu đang làm nhiệm vụ
         if (state == MissionState.Active || state == MissionState.ReadyToTurnIn)
         {
-            // Nếu đã có đủ đồ -> Trả nhiệm vụ cho Bếp Trưởng
             if (HasAllRequiredItems())
             {
-                CompleteMission();
                 conversation = completeConversation;
                 return true;
             }
@@ -89,9 +93,6 @@ public class Mission3Controller : MonoBehaviour, IConversationOverrideProvider
                 conversation = reminderConversation;
                 return true;
             }
-            
-            // Logic cho các NPC phụ (Người bán thịt/cá) nên được xử lý riêng ở object của họ 
-            // hoặc thông qua việc check tag/tên NPC nếu bạn dùng chung 1 Controller.
         }
 
         return false;
@@ -168,7 +169,7 @@ public class Mission3Controller : MonoBehaviour, IConversationOverrideProvider
         }
     }
 
-    private void CompleteMission()
+    public void CompleteMission()
     {
         if (state == MissionState.Completed) return;
 
