@@ -302,6 +302,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7663f468466dad243a7f317b7642cbd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MissionChecklistUI
+  panelRoot: {fileID: 0}
+  titleText: {fileID: 0}
+  bagLabel: {fileID: 0}
+  chopstickLabel: {fileID: 0}
+  hoeLabel: {fileID: 0}
+  bagTick: {fileID: 0}
+  chopstickTick: {fileID: 0}
+  hoeTick: {fileID: 0}
 --- !u!114 &26958518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8220,9 +8228,9 @@ MonoBehaviour:
   Event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 564300864}
         m_TargetAssemblyTypeName: MiniGameManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OpenMiniGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9723,8 +9731,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueEditor.NPCConversation
   CurrentIDCounter: 2
-  json: "{\"Options\":[{\"Connections\":[],\"EditorInfo\":{\"isRoot\":false,\"xPos\":80.05466,\"yPos\":131.679245},\"ID\":1,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"V\xE2ng
-    \u1EA1!\",\"parentUIDs\":[0],\"SpeechUID\":-1}],\"Parameters\":[],\"SpeechNodes\":[{\"Connections\":[{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":1}],\"EditorInfo\":{\"isRoot\":true,\"xPos\":81.29999,\"yPos\":22},\"ID\":0,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"C\u1EA3m
+  json: "{\"Options\":[{\"Connections\":[],\"EditorInfo\":{\"isRoot\":false,\"xPos\":269.50943,\"yPos\":131.679245},\"ID\":1,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"V\xE2ng
+    \u1EA1!\",\"parentUIDs\":[0],\"SpeechUID\":-1}],\"Parameters\":[],\"SpeechNodes\":[{\"Connections\":[{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":1}],\"EditorInfo\":{\"isRoot\":true,\"xPos\":270.754761,\"yPos\":22},\"ID\":0,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"C\u1EA3m
     \u01A1n ch\xE1u, \u0111\xE3 \u0111\u1EE7 nguy\xEAn li\u1EC7u cho l\u1EC5 l\xE0ng
     r\u1ED3i. Nh\u01B0ng hi\u1EC7n t\u1EA1i c\xF2n thi\u1EBFu m\xE2m ng\u0169 qu\u1EA3,
     ch\xE1u gi\xFAp ta th\xEAm ch\xFAt n\u1EEFa nh\xE9!\",\"parentUIDs\":[],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"B\xE1c
@@ -9741,9 +9749,9 @@ MonoBehaviour:
   Event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 564300864}
         m_TargetAssemblyTypeName: MiniGameManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OpenMiniGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17137,7 +17145,7 @@ Transform:
   m_GameObject: {fileID: 2035384343}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.772361, y: -0.057881355, z: 9.606781}
+  m_LocalPosition: {x: -5.6, y: -1.21, z: 5.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17189,7 +17197,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2035384347
 MonoBehaviour:
