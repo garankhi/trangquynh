@@ -18,16 +18,32 @@ public class DropZone : MonoBehaviour, IDropHandler
 
         if (fruit != null)
         {
-            // Nếu vùng này chưa đầy thì mới cho thả vào
-            if (transform.childCount < maxItems)
+            // 1. Tìm xem có Slot nào còn trống không
+            Transform emptySlot = null;
+            foreach (Transform child in transform)
             {
-                fruit.parentAfterDrag = transform; // Nhận quả này làm con
+                // Nếu Slot này chưa có "trái cây" nào bên trong
+                if (child.childCount == 0) 
+                {
+                    emptySlot = child;
+                    break;
+                }
+            }
+
+            // 2. Nếu tìm thấy Slot trống
+            if (emptySlot != null)
+            {
+                // Nhận quả này làm con của SLOT (thay vì làm con của Tray)
+                fruit.parentAfterDrag = emptySlot; 
                 
-                // Nếu đây là Mâm, ta cần kiểm tra xem đã đủ 5 quả chưa
                 if (type == ZoneType.Tray)
                 {
                     CheckTrayCondition();
                 }
+            }
+            else
+            {
+                Debug.Log("Mâm đã đầy 5 chỗ!");
             }
         }
     }
@@ -40,12 +56,11 @@ public class DropZone : MonoBehaviour, IDropHandler
 
     private void EvaluateWin()
     {
+        // Tìm tất cả Script DraggableFruit nằm trong Tray (bao gồm cả trong các Slot)
         DraggableFruit[] fruitsInTray = GetComponentsInChildren<DraggableFruit>();
 
-        // Nếu người chơi chưa xếp đủ 5 quả thì chưa làm gì cả
         if (fruitsInTray.Length < 5) return;
 
-        // Nếu đã đủ 5 quả, đếm xem có bao nhiêu quả đúng
         int correctCount = 0;
         foreach (DraggableFruit f in fruitsInTray)
         {
@@ -54,18 +69,14 @@ public class DropZone : MonoBehaviour, IDropHandler
 
         if (correctCount == 5)
         {
-            Debug.Log("Chúc mừng! Đã xếp đúng Mâm Ngũ Quả!");
-            
-            // 1. Gọi GameManager để tắt mini-game
+            Debug.Log("Chúc mừng!");
             MiniGameManager.Instance.CloseMiniGame();
-
-            // 2. Kích hoạt sự kiện Thắng (Để bật hội thoại tiếp theo)
             OnWinGame?.Invoke(); 
         }
         else
         {
-            Debug.Log("Sai rồi! Trong mâm có quả không đúng chuẩn.");
-            // Bạn có thể hiện Text UI thông báo ở đây
+            // Có thể thêm hiệu ứng rung mâm hoặc hiện text thông báo "Sai quả rồi"
+            Debug.Log("Mâm đủ 5 quả nhưng có quả sai!");
         }
     }
 }
