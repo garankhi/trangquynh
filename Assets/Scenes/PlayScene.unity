@@ -302,6 +302,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7663f468466dad243a7f317b7642cbd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MissionChecklistUI
+  panelRoot: {fileID: 0}
+  titleText: {fileID: 0}
+  bagLabel: {fileID: 0}
+  chopstickLabel: {fileID: 0}
+  hoeLabel: {fileID: 0}
+  bagTick: {fileID: 0}
+  chopstickTick: {fileID: 0}
+  hoeTick: {fileID: 0}
 --- !u!114 &26958518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16506,19 +16514,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 2083831286}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 827dac8bb0dea5541a06c848ef30ec90, type: 3}
       propertyPath: m_LocalScale.x
-      value: 184.5
+      value: 184.49998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 827dac8bb0dea5541a06c848ef30ec90, type: 3}
       propertyPath: m_LocalScale.y
-      value: 184.5
+      value: 184.49998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 827dac8bb0dea5541a06c848ef30ec90, type: 3}
       propertyPath: m_LocalScale.z
-      value: 184.5
+      value: 184.50002
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 827dac8bb0dea5541a06c848ef30ec90, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18553,6 +18561,11 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!4 &2073026438 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 827dac8bb0dea5541a06c848ef30ec90, type: 3}
+  m_PrefabInstance: {fileID: 1888037286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2077642591
 GameObject:
   m_ObjectHideFlags: 0
@@ -18752,6 +18765,7 @@ Transform:
   - {fileID: 687162362}
   - {fileID: 1661155171}
   - {fileID: 1931362961}
+  - {fileID: 2073026438}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2084919331
@@ -20296,4 +20310,3 @@ SceneRoots:
   - {fileID: 225989303}
   - {fileID: 352641530}
   - {fileID: 564300865}
-  - {fileID: 1888037286}
