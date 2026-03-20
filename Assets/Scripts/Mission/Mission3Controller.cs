@@ -31,9 +31,6 @@ public class Mission3Controller : MonoBehaviour, IConversationOverrideProvider
     private MissionState state = MissionState.NotStarted;
     private bool introAccepted;
 
-    private bool dragDropMeatFinished = false;
-    private bool quizFishFinished = false;
-
     private void Awake()
     {
         if (conversationStarter == null) conversationStarter = GetComponent<ConversationStarter>();
@@ -136,7 +133,6 @@ public class Mission3Controller : MonoBehaviour, IConversationOverrideProvider
         if (inventory.GetTotalAmount(meatItem) == 0) // Tránh nhận trùng nếu nói chuyện lại
         {
             inventory.AddItem(meatItem, 1);
-            Debug.Log("Trả lời ĐÚNG: Nhận thịt!");
         }
     }
 
@@ -146,7 +142,6 @@ public class Mission3Controller : MonoBehaviour, IConversationOverrideProvider
         {
             moneyManager.AddMoney(-wrongAnswerPenalty); // Trừ 5 đồng
             inventory.AddItem(meatItem, 1);
-            Debug.Log("Trả lời SAI: Bị trừ 5 đồng!");
         }
     }
 
@@ -156,7 +151,6 @@ public class Mission3Controller : MonoBehaviour, IConversationOverrideProvider
         if (inventory.GetTotalAmount(fishItem) == 0)
         {
             inventory.AddItem(fishItem, 1);
-            Debug.Log("Trả lời ĐÚNG: Nhận cá!");
         }
     }
 
@@ -166,7 +160,6 @@ public class Mission3Controller : MonoBehaviour, IConversationOverrideProvider
         {
             moneyManager.AddMoney(-wrongAnswerPenalty); // Trừ 5 đồng
             inventory.AddItem(fishItem, 1);
-            Debug.Log("Trả lời SAI: Bị trừ 5 đồng!");
         }
     }
 
@@ -179,23 +172,14 @@ public class Mission3Controller : MonoBehaviour, IConversationOverrideProvider
 
         state = MissionState.Completed;
         if (checklistUI != null) checklistUI.Hide();
-        if (moneyManager != null) moneyManager.AddMoney(rewardMoney);
-        Debug.Log("Nhiệm vụ 3 hoàn thành!");
     }
 
     public void ContinueDialogueAfterMiniGame()
     {
-        Debug.Log("Mini-game hoàn thành, tiếp tục hội thoại!");
-        
-        // Gọi hội thoại tiếp theo sử dụng DialogueEditor
         if (afterMiniGameConversation != null)
         {
             ConversationManager.Instance.StartConversation(afterMiniGameConversation);
             if (moneyManager != null) moneyManager.AddMoney(rewardMoney);
-        }
-        else
-        {
-            Debug.LogWarning("Chưa gán afterMiniGameConversation trong Inspector của Mission3Controller!");
         }
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 public class DropZone : MonoBehaviour, IDropHandler
 {
     public MiniGameManager miniGameManager;
-    public UnityEvent OnWinGame;
     public enum ZoneType { Table, Tray }
     public ZoneType type;
     
@@ -18,61 +17,62 @@ public class DropZone : MonoBehaviour, IDropHandler
 
         if (fruit != null)
         {
-            Transform closestSlot = null;
-            float minDistance = float.MaxValue;
-
-            foreach (Transform slot in transform)
-            {
-                if (slot.childCount > 0) continue;
-
-                float distance = Vector3.Distance(slot.position, droppedObj.transform.position);
-
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    closestSlot = slot;
-                }
-            }
+            Transform closestSlot = FindClosestEmptySlot(droppedObj.transform.position);
 
             if (closestSlot != null)
             {
+                // Cập nhật thông tin vị trí
                 fruit.parentAfterDrag = closestSlot;
-                fruit.originalContainer = closestSlot; // 🔥 Cập nhật vị trí ban đầu mới
+                fruit.originalContainer = closestSlot; 
+                fruit.currentZone = this;
+
+                if (type == ZoneType.Table)
+                {
+                    fruit.lastTableContainer = closestSlot;
+                }
+
                 fruit.wasDroppedSuccessfully = true; 
 
                 droppedObj.transform.SetParent(closestSlot);
                 droppedObj.transform.localPosition = Vector3.zero;
                 droppedObj.transform.localScale = Vector3.one;
 
-                if (type == ZoneType.Tray)
-                {
-                    CheckTrayCondition();
-                }
+                // XÓA HOẶC COMMENT DÒNG NÀY: Không tự động check nữa
+                // if (type == ZoneType.Tray) { CheckTrayCondition(); }
             }
         }
     }
 
-    private void CheckTrayCondition()
+    // Hàm phụ để tìm slot trống gần nhất (tách ra cho sạch code)
+    private Transform FindClosestEmptySlot(Vector3 position)
     {
-        Invoke(nameof(EvaluateWin), 0.1f); 
+        Transform closestSlot = null;
+        float minDistance = float.MaxValue;
+        foreach (Transform slot in transform)
+        {
+            if (slot.childCount > 0) continue;
+            float distance = Vector3.Distance(slot.position, position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestSlot = slot;
+            }
+        }
+        return closestSlot;
     }
 
-    private void EvaluateWin()
+    // Hàm này sẽ được MiniGameManager gọi khi bấm nút Confirm
+    public bool CheckResult()
     {
         DraggableFruit[] fruitsInTray = GetComponentsInChildren<DraggableFruit>();
+        
+        // Nếu chưa đủ số lượng quả yêu cầu thì coi như chưa xong (hoặc tùy bạn)
+        if (fruitsInTray.Length < maxItems) return false;
 
-        if (fruitsInTray.Length < 5) return;
-
-        int correctCount = 0;
         foreach (DraggableFruit f in fruitsInTray)
         {
-            if (f.isCorrectFruit) correctCount++;
+            if (!f.isCorrectFruit) return false; // Chỉ cần 1 quả sai là fail
         }
-
-        if (correctCount == 5)
-        {
-            MiniGameManager.Instance.CloseMiniGame();
-            OnWinGame?.Invoke(); 
-        }
+        return true; 
     }
 }
