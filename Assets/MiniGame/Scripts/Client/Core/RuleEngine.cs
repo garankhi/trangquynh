@@ -72,9 +72,9 @@ public class RuleEngine
         int effectiveP2 = scoreManager.GetScore(PlayerTurn.P2) - scoreManager.GetOwed(PlayerTurn.P2);
 
         if (effectiveP1 > effectiveP2)
-            return "Người chơi 1 thắng!";
+            return "Trạng Quỳnh thắng!";
         else if (effectiveP2 > effectiveP1)
-            return "Người chơi 2 thắng!";
+            return "Tí Vua thắng!";
         else
             return "Hòa!";
     }
