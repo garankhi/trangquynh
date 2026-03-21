@@ -5,6 +5,8 @@ using UnityEngine;
 public class ConversationStarter : MonoBehaviour
 {
     [SerializeField] private NPCConversation myConversation;
+    [SerializeField] private KeyCode interactKey = KeyCode.F;
+    [SerializeField] private GameObject talkHintPopup;
 
     public NPCConversation DefaultConversation => myConversation;
 
@@ -26,6 +28,26 @@ public class ConversationStarter : MonoBehaviour
         conversationOverrideProviders = providers.ToArray();
     }
 
+    private void Start()
+    {
+        SetHintVisible(false);
+    }
+
+    private void OnDisable()
+    {
+        SetHintVisible(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+        {
+            return;
+        }
+
+        SetHintVisible(CanStartConversation());
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (!other.CompareTag("Player"))
@@ -33,18 +55,50 @@ public class ConversationStarter : MonoBehaviour
             return;
         }
 
-        if (ConversationManager.Instance == null || ConversationManager.Instance.IsConversationActive)
+        if (!CanStartConversation())
         {
+            SetHintVisible(false);
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        SetHintVisible(true);
+
+        if (Input.GetKeyDown(interactKey))
         {
             NPCConversation conversationToStart = GetConversationToStart();
             if (conversationToStart != null)
             {
                 ConversationManager.Instance.StartConversation(conversationToStart);
+                SetHintVisible(false);
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+        {
+            return;
+        }
+
+        SetHintVisible(false);
+    }
+
+    private bool CanStartConversation()
+    {
+        return ConversationManager.Instance != null && !ConversationManager.Instance.IsConversationActive;
+    }
+
+    private void SetHintVisible(bool visible)
+    {
+        if (talkHintPopup == null)
+        {
+            return;
+        }
+
+        if (talkHintPopup.activeSelf != visible)
+        {
+            talkHintPopup.SetActive(visible);
         }
     }
 
