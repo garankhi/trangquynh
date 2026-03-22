@@ -11,6 +11,7 @@ public class Mission3Controller : MonoBehaviour, IConversationOverrideProvider
     [SerializeField] private Inventory inventory;
     [SerializeField] private MoneyManager moneyManager;
     [SerializeField] private MissionChecklistUI checklistUI;
+    [SerializeField] private PeopleNeedHelpBoardUI peopleNeedHelpBoardUI;
 
     [Header("Mission Items")]
     [SerializeField] private ItemSO meatItem;
@@ -102,6 +103,7 @@ public class Mission3Controller : MonoBehaviour, IConversationOverrideProvider
         {
             introAccepted = false;
             state = MissionState.Active;
+            if (peopleNeedHelpBoardUI != null) peopleNeedHelpBoardUI.HideBoard();
             if (checklistUI != null) checklistUI.Show();
         }
     }
@@ -172,6 +174,11 @@ public class Mission3Controller : MonoBehaviour, IConversationOverrideProvider
 
         state = MissionState.Completed;
         if (checklistUI != null) checklistUI.Hide();
+        if (peopleNeedHelpBoardUI != null)
+        {
+            peopleNeedHelpBoardUI.MarkMissionCompleted("mission3");
+            peopleNeedHelpBoardUI.ShowBoardAfterConversation();
+        }
     }
 
     public void ContinueDialogueAfterMiniGame()

@@ -21,6 +21,7 @@ public class Mission2Controller : MonoBehaviour, IConversationOverrideProvider
     [SerializeField] private ConversationStarter conversationStarter;
     [SerializeField] private Inventory inventory;
     [SerializeField] private GameObject checklistPanel;
+    [SerializeField] private PeopleNeedHelpBoardUI peopleNeedHelpBoardUI;
 
     [Header("Mission Item")]
     [SerializeField] private ItemSO thuItem; // tờ thư
@@ -74,6 +75,12 @@ public class Mission2Controller : MonoBehaviour, IConversationOverrideProvider
 
         if (checklistPanel != null)
             checklistPanel.SetActive(false);
+
+        if (peopleNeedHelpBoardUI != null)
+        {
+            peopleNeedHelpBoardUI.MarkMissionCompleted("mission2");
+            peopleNeedHelpBoardUI.ShowBoardAfterConversation();
+        }
     }
 
     public bool IsActive => state == MissionState.Active;
@@ -110,6 +117,9 @@ public class Mission2Controller : MonoBehaviour, IConversationOverrideProvider
 
         introAccepted = false;
         state = MissionState.Active;
+
+        if (peopleNeedHelpBoardUI != null)
+            peopleNeedHelpBoardUI.HideBoard();
 
         // Thêm tờ thư vào inventory
         if (inventory != null && thuItem != null)

@@ -7,10 +7,15 @@ public class ConversationStarter : MonoBehaviour
     [SerializeField] private NPCConversation myConversation;
     [SerializeField] private KeyCode interactKey = KeyCode.F;
     [SerializeField] private GameObject talkHintPopup;
+    [SerializeField] private bool playOnceWhenPlayerInsideTrigger;
+    [SerializeField] private GameObject autoPlayConversationCrosshair;
 
     public NPCConversation DefaultConversation => myConversation;
 
     private IConversationOverrideProvider[] conversationOverrideProviders;
+    private bool hasPlayedInsideTrigger;
+    private bool shouldRestoreCrosshairAfterConversation;
+    private bool crosshairWasActiveBeforeAutoPlayConversation;
 
     private void Awake()
     {
@@ -33,15 +38,28 @@ public class ConversationStarter : MonoBehaviour
         SetHintVisible(false);
     }
 
+    private void OnEnable()
+    {
+        ConversationManager.OnConversationEnded += HandleConversationEnded;
+    }
+
     private void OnDisable()
     {
+        ConversationManager.OnConversationEnded -= HandleConversationEnded;
         SetHintVisible(false);
+        RestoreCrosshairIfNeeded();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
         {
+            return;
+        }
+
+        if (playOnceWhenPlayerInsideTrigger)
+        {
+            TryPlayConversationInsideTriggerOnce();
             return;
         }
 
@@ -55,6 +73,12 @@ public class ConversationStarter : MonoBehaviour
             return;
         }
 
+        if (playOnceWhenPlayerInsideTrigger)
+        {
+            TryPlayConversationInsideTriggerOnce();
+            return;
+        }
+
         if (!CanStartConversation())
         {
             SetHintVisible(false);
@@ -65,12 +89,7 @@ public class ConversationStarter : MonoBehaviour
 
         if (Input.GetKeyDown(interactKey))
         {
-            NPCConversation conversationToStart = GetConversationToStart();
-            if (conversationToStart != null)
-            {
-                ConversationManager.Instance.StartConversation(conversationToStart);
-                SetHintVisible(false);
-            }
+            TryStartConversation();
         }
     }
 
@@ -89,6 +108,22 @@ public class ConversationStarter : MonoBehaviour
         return ConversationManager.Instance != null && !ConversationManager.Instance.IsConversationActive;
     }
 
+    private void TryPlayConversationInsideTriggerOnce()
+    {
+        if (hasPlayedInsideTrigger)
+        {
+            SetHintVisible(false);
+            return;
+        }
+
+        SetHintVisible(false);
+
+        if (TryStartConversation())
+        {
+            hasPlayedInsideTrigger = true;
+        }
+    }
+
     private void SetHintVisible(bool visible)
     {
         if (talkHintPopup == null)
@@ -99,6 +134,63 @@ public class ConversationStarter : MonoBehaviour
         if (talkHintPopup.activeSelf != visible)
         {
             talkHintPopup.SetActive(visible);
+        }
+    }
+
+    private bool TryStartConversation()
+    {
+        if (!CanStartConversation())
+        {
+            return false;
+        }
+
+        NPCConversation conversationToStart = GetConversationToStart();
+        if (conversationToStart == null)
+        {
+            return false;
+        }
+
+        ConversationManager.Instance.StartConversation(conversationToStart);
+        SetHintVisible(false);
+        HideCrosshairForConversation();
+        return true;
+    }
+
+    private void HideCrosshairForConversation()
+    {
+        if (autoPlayConversationCrosshair == null)
+        {
+            shouldRestoreCrosshairAfterConversation = false;
+            return;
+        }
+
+        crosshairWasActiveBeforeAutoPlayConversation = autoPlayConversationCrosshair.activeSelf;
+
+        if (crosshairWasActiveBeforeAutoPlayConversation)
+        {
+            autoPlayConversationCrosshair.SetActive(false);
+        }
+
+        shouldRestoreCrosshairAfterConversation = crosshairWasActiveBeforeAutoPlayConversation;
+    }
+
+    private void HandleConversationEnded()
+    {
+        RestoreCrosshairIfNeeded();
+    }
+
+    private void RestoreCrosshairIfNeeded()
+    {
+        if (!shouldRestoreCrosshairAfterConversation)
+        {
+            return;
+        }
+
+        shouldRestoreCrosshairAfterConversation = false;
+
+        if (autoPlayConversationCrosshair != null)
+        {
+            autoPlayConversationCrosshair.SetActive(true);
         }
     }
 

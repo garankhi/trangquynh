@@ -17,6 +17,7 @@ public class Mission1Controller : MonoBehaviour, IConversationOverrideProvider
     [SerializeField] private Inventory inventory;
     [SerializeField] private MoneyManager moneyManager;
     [SerializeField] private MissionChecklistUI checklistUI;
+    [SerializeField] private PeopleNeedHelpBoardUI peopleNeedHelpBoardUI;
 
     [Header("Mission Items")]
     [SerializeField] private ItemSO bagItem;
@@ -129,6 +130,11 @@ public class Mission1Controller : MonoBehaviour, IConversationOverrideProvider
         introAccepted = false;
         state = MissionState.Active;
 
+        if (peopleNeedHelpBoardUI != null)
+        {
+            peopleNeedHelpBoardUI.HideBoard();
+        }
+
         if (checklistUI != null)
         {
             checklistUI.Show();
@@ -210,6 +216,12 @@ public class Mission1Controller : MonoBehaviour, IConversationOverrideProvider
         if (checklistUI != null)
         {
             checklistUI.Hide();
+        }
+
+        if (peopleNeedHelpBoardUI != null)
+        {
+            peopleNeedHelpBoardUI.MarkMissionCompleted("mission1");
+            peopleNeedHelpBoardUI.ShowBoardAfterConversation();
         }
     }
 }
