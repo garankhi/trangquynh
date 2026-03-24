@@ -41,11 +41,18 @@ public class MarketNPCWander : MonoBehaviour
     [Tooltip("Tên parameter bool trong Animator")]
     public string walkParameter = "isWalking";
 
-    [Tooltip("Tên parameter int để chọn idle animation")]
+    [Tooltip("Tên parameter bool để kích hoạt action (BlendTree)")]
+    public string actingParameter = "isActing";
+
+    [Tooltip("Tên parameter int để chọn action animation")]
     public string idleIndexParameter = "idleIndex";
 
-    [Tooltip("Số lượng idle animation (Idle, PointingForward, LookAround, OldManIdle)")]
-    public int idleAnimationCount = 4;
+    [Tooltip("Số lượng action animation trong BlendTree")]
+    public int idleAnimationCount = 3;
+
+    [Header("Idle Pause (nghỉ sau action)")]
+    [Tooltip("Thời gian Idle trước khi đi tiếp (giây)")]
+    public float idlePauseTime = 1f;
 
     private Animator _animator;
     private int _currentWaypointIndex;
@@ -117,21 +124,50 @@ public class MarketNPCWander : MonoBehaviour
     private IEnumerator WaitAtWaypoint()
     {
         _isWaiting = true;
+        SetWalking(false); // Walk → dừng di chuyển
 
-        // Random chọn 1 idle animation
-        int randomIdle = Random.Range(0, idleAnimationCount);
+        // Lấy MarketWaypoint component (nếu có)
+        Transform currentWP = waypoints[_currentWaypointIndex];
+        MarketWaypoint wpData = currentWP.GetComponent<MarketWaypoint>();
+
+        // Quay mặt theo hướng waypoint
+        if (wpData != null && wpData.useFacingDirection)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(currentWP.forward);
+            transform.rotation = targetRot;
+        }
+
+        // === PHASE 1: Action (BlendTree) ===
+        int randomIdle;
+        if (wpData != null)
+        {
+            randomIdle = wpData.GetRandomIdleIndex();
+        }
+        else
+        {
+            randomIdle = Random.Range(0, idleAnimationCount);
+        }
+
         if (_animator != null)
         {
-            _animator.SetInteger(idleIndexParameter, randomIdle);
+            _animator.SetFloat(idleIndexParameter, randomIdle);
+            _animator.SetBool(actingParameter, true); // → ActionBlendTree
         }
-        SetWalking(false); // Chuyển sang Idle (animation nào tuỳ idleIndex)
 
-        float waitTime = Random.Range(minWaitTime, maxWaitTime);
-        yield return new WaitForSeconds(waitTime);
+        float actionTime = Random.Range(minWaitTime, maxWaitTime);
+        yield return new WaitForSeconds(actionTime);
 
-        // Chuyển sang waypoint tiếp theo
+        // === PHASE 2: Quay về Idle ===
+        if (_animator != null)
+        {
+            _animator.SetBool(actingParameter, false); // → Idle
+        }
+
+        yield return new WaitForSeconds(idlePauseTime);
+
+        // === PHASE 3: Đi tiếp ===
         _currentWaypointIndex = (_currentWaypointIndex + 1) % waypoints.Length;
-        SetWalking(true); // Chuyển sang Walk
+        SetWalking(true);
         _isWaiting = false;
     }
 
