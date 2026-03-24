@@ -41,6 +41,12 @@ public class MarketNPCWander : MonoBehaviour
     [Tooltip("Tên parameter bool trong Animator")]
     public string walkParameter = "isWalking";
 
+    [Tooltip("Tên parameter int để chọn idle animation")]
+    public string idleIndexParameter = "idleIndex";
+
+    [Tooltip("Số lượng idle animation (Idle, PointingForward, LookAround, OldManIdle)")]
+    public int idleAnimationCount = 4;
+
     private Animator _animator;
     private int _currentWaypointIndex;
     private bool _isWaiting;
@@ -111,7 +117,14 @@ public class MarketNPCWander : MonoBehaviour
     private IEnumerator WaitAtWaypoint()
     {
         _isWaiting = true;
-        SetWalking(false); // Chuyển sang Idle
+
+        // Random chọn 1 idle animation
+        int randomIdle = Random.Range(0, idleAnimationCount);
+        if (_animator != null)
+        {
+            _animator.SetInteger(idleIndexParameter, randomIdle);
+        }
+        SetWalking(false); // Chuyển sang Idle (animation nào tuỳ idleIndex)
 
         float waitTime = Random.Range(minWaitTime, maxWaitTime);
         yield return new WaitForSeconds(waitTime);
