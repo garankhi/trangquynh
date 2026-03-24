@@ -29,6 +29,14 @@ public class MarketNPCWander : MonoBehaviour
     [Tooltip("Tốc độ xoay hướng")]
     public float rotationSpeed = 5f;
 
+    [Header("Ground Snapping")]
+    [Tooltip("Layer mặt đất để raycast")]
+    public LayerMask groundLayer = ~0; // Mặc định = tất cả layer
+    [Tooltip("Độ cao raycast bắt đầu (từ trên NPC chiếu xuống)")]
+    public float raycastHeight = 5f;
+    [Tooltip("Khoảng cách raycast tối đa")]
+    public float raycastDistance = 10f;
+
     [Header("Animation")]
     [Tooltip("Tên parameter bool trong Animator")]
     public string walkParameter = "isWalking";
@@ -50,6 +58,7 @@ public class MarketNPCWander : MonoBehaviour
 
         // Bắt đầu từ waypoint gần nhất
         _currentWaypointIndex = GetClosestWaypointIndex();
+        SnapToGround(); // Đặt NPC xuống mặt đất ngay từ đầu
         SetWalking(true);
     }
 
@@ -74,11 +83,28 @@ public class MarketNPCWander : MonoBehaviour
         Vector3 moveDir = direction.normalized;
         transform.position += moveDir * walkSpeed * Time.deltaTime;
 
+        // Snap xuống mặt đất mỗi frame
+        SnapToGround();
+
         // Xoay mặt về hướng đi
         if (moveDir != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDir);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    /// <summary>
+    /// Raycast xuống để đặt NPC lên mặt đất.
+    /// </summary>
+    private void SnapToGround()
+    {
+        Vector3 rayOrigin = transform.position + Vector3.up * raycastHeight;
+        if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer))
+        {
+            Vector3 pos = transform.position;
+            pos.y = hit.point.y;
+            transform.position = pos;
         }
     }
 
