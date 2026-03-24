@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PeopleNeedHelpMissionTracker : MonoBehaviour
 {
-    [SerializeField] private List<string> trackedMissionIds = new List<string> { "mission1", "mission2", "mission3" };
+    [SerializeField] private List<string> trackedMissionIds = new List<string> { "mission1", "mission2", "mission3", "mission4" };
 
     private readonly HashSet<string> completedMissionIds = new HashSet<string>();
 

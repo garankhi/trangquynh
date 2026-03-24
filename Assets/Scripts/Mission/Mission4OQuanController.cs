@@ -24,6 +24,7 @@ public class Mission4OQuanController : MonoBehaviour, IConversationOverrideProvi
     [Header("References")]
     [SerializeField] private ConversationStarter conversationStarter;
     [SerializeField] private MoneyManager moneyManager;
+    [SerializeField] private PeopleNeedHelpBoardUI peopleNeedHelpBoardUI;
 
     [Header("Mini-Game")]
     [SerializeField] private GameObject oquanRoot;            // GameObject chứa toàn bộ mini-game (tắt sẵn)
@@ -204,6 +205,12 @@ public class Mission4OQuanController : MonoBehaviour, IConversationOverrideProvi
             // Cộng tiền thưởng
             if (moneyManager != null)
                 moneyManager.AddMoney(rewardMoney);
+
+            if (peopleNeedHelpBoardUI != null)
+            {
+                peopleNeedHelpBoardUI.MarkMissionCompleted("mission4");
+                peopleNeedHelpBoardUI.ShowBoardAfterConversation();
+            }
 
             // Mở hội thoại chiến thắng
             if (winConversation != null)

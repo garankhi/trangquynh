@@ -10,6 +10,7 @@ public class PeopleNeedHelpBoardUI : MonoBehaviour
     [SerializeField] private Image mission1Tick;
     [SerializeField] private Image mission2Tick;
     [SerializeField] private Image mission3Tick;
+    [SerializeField] private Image mission4Tick;
 
     private bool waitingForConversationEnd;
 
@@ -105,6 +106,7 @@ public class PeopleNeedHelpBoardUI : MonoBehaviour
         SetTickVisible(mission1Tick, IsMissionCompleted("mission1"));
         SetTickVisible(mission2Tick, IsMissionCompleted("mission2"));
         SetTickVisible(mission3Tick, IsMissionCompleted("mission3"));
+        SetTickVisible(mission4Tick, IsMissionCompleted("mission4"));
     }
 
     private bool IsMissionCompleted(string missionId)
