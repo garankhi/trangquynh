@@ -46,3 +46,6 @@
 
 # Large 3D assets in this repo
 *.fbx filter=lfs diff=lfs merge=lfs -text
+
+# Large media files for portfolio/demo assets
+*.gif filter=lfs diff=lfs merge=lfs -text
